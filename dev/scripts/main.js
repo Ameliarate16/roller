@@ -14,7 +14,7 @@ const addDie = dieSize => {
         const die = dice[type];
         if (die.sides === dieSize) {
             die.pool += 1;
-            //update html
+            $(`p.${type}`).text(die.pool+type);
             return true;
         }
     }
@@ -26,7 +26,7 @@ const removeDie = dieSize => {
         const die = dice[type];
         if (die.sides === dieSize && die.pool > 0) {
             die.pool -= 1;
-            //update html
+            $(`p.${type}`).text(die.pool+type);
             return true;
         }
 
@@ -36,12 +36,15 @@ const removeDie = dieSize => {
 
 const roll = () => {
     let total = 0;
+    $(".output > span").remove();
     for (let type in dice){
         const die = dice[type];
         for (let i = 0; i < die.pool; i++){
             const roll = Math.floor(Math.random()*die.sides) + 1;
             total += roll;
-            //output roll;
+            $('.output').append(`
+                <span class="roll" >[${roll}]</span>
+            `)
         }
     }
     return total;
@@ -51,7 +54,7 @@ const reset = () => {
     for (let type in dice){
         const die = dice[type];
         die.pool = 0;
-        //reset html
+        $(`p.${type}`).text(die.pool+type);
     }
 }
 
@@ -60,7 +63,9 @@ $(function() {
     $("form").on("click", "#rollButton", function(e){
         e.preventDefault();
         const total = roll();
-        //output total 
+        $('.output').append(`
+            <span class="total">= ${total}</span>
+        `) 
     })
     $("form").on("click", "button.add", function(e){
         e.preventDefault();
