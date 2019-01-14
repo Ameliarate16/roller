@@ -24,6 +24,10 @@
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-sass": "^4.0.2"
+    "gulp-sass": "^4.0.2",
+    "sass": "^1.16.0"
+  },
+  "dependencies": {
+    "gulp-watch": "^5.0.1"
   }
 }

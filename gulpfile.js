@@ -16,8 +16,8 @@ gulp.task('styles', function() {
 });
 
 gulp.task('watch', () => {
-  gulp.watch('./dev/styles/**/*.scss', ['styles']);
-  gulp.watch('./dev/scripts/main.js', ['scripts']);
+  gulp.watch('./dev/styles/**/*.scss', gulp.series('styles'));
+  gulp.watch('./dev/scripts/main.js', gulp.series('scripts'));
   gulp.watch('*.html', reload);
 });
 
