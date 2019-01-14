@@ -53,7 +53,7 @@ const reset = () => {
 }
 
 $(function() {
-    $("form").on("submit", function(e){
+    $("#rollButton").on("click", function(e){
         e.preventDefault();
         const total = roll();
         console.log(total);
@@ -67,7 +67,7 @@ $(function() {
         const size = parseInt(this.val); 
         removeDie(size);
     })
-    $("#clear").on("click", function(){
+    $("#clearButton").on("click", function(){
         reset();
     })
 });

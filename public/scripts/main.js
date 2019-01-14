@@ -57,7 +57,7 @@ var reset = function reset() {
 };
 
 $(function () {
-  $("form").on("submit", function (e) {
+  $("#rollButton").on("click", function (e) {
     e.preventDefault();
     var total = roll();
     console.log(total); //output total 
@@ -70,7 +70,7 @@ $(function () {
     var size = parseInt(this.val);
     removeDie(size);
   });
-  $("#clear").on("click", function () {
+  $("#clearButton").on("click", function () {
     reset();
   });
 });
