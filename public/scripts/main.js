@@ -12,7 +12,9 @@ var dice = {
 };
 
 var addDie = function addDie(dieSize) {
-  for (var die in dice) {
+  for (var type in dice) {
+    var die = dice[type];
+
     if (die.sides === dieSize) {
       die.pool += 1; //update html
 
@@ -24,7 +26,9 @@ var addDie = function addDie(dieSize) {
 };
 
 var removeDie = function removeDie(dieSize) {
-  for (var die in dice) {
+  for (var type in dice) {
+    var die = dice[type];
+
     if (die.sides === dieSize && die.pool > 0) {
       die.pool -= 1; //update html
 
@@ -38,11 +42,12 @@ var removeDie = function removeDie(dieSize) {
 var roll = function roll() {
   var total = 0;
 
-  for (var die in dice) {
+  for (var type in dice) {
+    var die = dice[type];
+
     for (var i = 0; i < die.pool; i++) {
       var _roll = Math.floor(Math.random() * die.sides) + 1;
 
-      console.log(_roll);
       total += _roll; //output roll;
     }
   }
@@ -51,26 +56,30 @@ var roll = function roll() {
 };
 
 var reset = function reset() {
-  for (var die in dice) {
+  for (var type in dice) {
+    var die = dice[type];
     die.pool = 0; //reset html
   }
 };
 
 $(function () {
-  $("#rollButton").on("click", function (e) {
+  //debugger;
+  $("form").on("click", "#rollButton", function (e) {
     e.preventDefault();
-    var total = roll();
-    console.log(total); //output total 
+    var total = roll(); //output total 
   });
-  $(".add").on("click", function () {
-    var size = parseInt(this.val);
+  $("form").on("click", "button.add", function (e) {
+    e.preventDefault();
+    var size = parseInt(this.value);
     addDie(size);
   });
-  $(".remove").on("click", function () {
-    var size = parseInt(this.val);
+  $("form").on("click", "button.remove", function (e) {
+    e.preventDefault();
+    var size = parseInt(this.value);
     removeDie(size);
   });
-  $("#clearButton").on("click", function () {
+  $("form").on("click", "#clearButton", function (e) {
+    e.preventDefault();
     reset();
   });
 });

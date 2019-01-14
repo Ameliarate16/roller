@@ -10,7 +10,8 @@ const dice = {
 }
 
 const addDie = dieSize => {
-    for (let die in dice){
+    for (let type in dice){
+        const die = dice[type];
         if (die.sides === dieSize) {
             die.pool += 1;
             //update html
@@ -21,7 +22,8 @@ const addDie = dieSize => {
 }
 
 const removeDie = dieSize => {
-    for (let die in dice){
+    for (let type in dice){
+        const die = dice[type];
         if (die.sides === dieSize && die.pool > 0) {
             die.pool -= 1;
             //update html
@@ -34,10 +36,10 @@ const removeDie = dieSize => {
 
 const roll = () => {
     let total = 0;
-    for (let die in dice){
+    for (let type in dice){
+        const die = dice[type];
         for (let i = 0; i < die.pool; i++){
             const roll = Math.floor(Math.random()*die.sides) + 1;
-            console.log(roll);
             total += roll;
             //output roll;
         }
@@ -46,28 +48,32 @@ const roll = () => {
 }
 
 const reset = () => {
-    for (let die in dice){
+    for (let type in dice){
+        const die = dice[type];
         die.pool = 0;
         //reset html
     }
 }
 
 $(function() {
-    $("#rollButton").on("click", function(e){
+    //debugger;
+    $("form").on("click", "#rollButton", function(e){
         e.preventDefault();
         const total = roll();
-        console.log(total);
         //output total 
     })
-    $(".add").on("click", function(){
-        const size = parseInt(this.val); 
+    $("form").on("click", "button.add", function(e){
+        e.preventDefault();
+        const size = parseInt(this.value); 
         addDie(size);
     })
-    $(".remove").on("click", function(){
-        const size = parseInt(this.val); 
+    $("form").on("click", "button.remove", function(e){
+        e.preventDefault();
+        const size = parseInt(this.value); 
         removeDie(size);
     })
-    $("#clearButton").on("click", function(){
+    $("form").on("click", "#clearButton", function(e){
+        e.preventDefault();
         reset();
     })
 });

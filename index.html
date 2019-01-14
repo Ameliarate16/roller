@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>My Project</title>
+	<title>Dice Roller</title>
 	<link rel="stylesheet" href="public/styles/style.css">
 </head>
 <body>
@@ -14,9 +14,14 @@
             <button class="remove d20" value="20">Remove d20</button>
             <button class="add d6" value="6">Add d6</button>
             <button class="remove d6" value="6">Remove d6</button>
-            <button id="rollButton">Roll</button>
+            <button id="rollButton" value="Roll">Roll</button>
             <button id="clearButton" value="Clear">Clear</button>
         </form>
+        <div class="pool">
+            <p class="d20">0d20</p>
+            <p class="d6">0d6</p>
+        </div>
+        <div class="output"></div>
 	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="public/scripts/main.js"></script>
