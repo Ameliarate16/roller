@@ -1,17 +1,11 @@
 const dice = {
     d20: {
         pool: 0,
-        sides: 20,
-        roll: () => {
-            return Math.floor(Math.random()*20) + 1;
-        }
+        sides: 20
     },
     d6: {
         pool: 0,
-        sides: 6,
-        roll: () => {
-            return Math.floor(Math.random()*6) + 1;
-        }
+        sides: 6
     }
 }
 
@@ -42,7 +36,8 @@ const roll = () => {
     let total = 0;
     for (let die in dice){
         for (let i = 0; i < die.pool; i++){
-            const roll = die.roll();
+            const roll = Math.floor(Math.random()*die.sides) + 1;
+            console.log(roll);
             total += roll;
             //output roll;
         }
@@ -58,5 +53,21 @@ const reset = () => {
 }
 
 $(function() {
-
+    $("form").on("submit", function(e){
+        e.preventDefault();
+        const total = roll();
+        console.log(total);
+        //output total 
+    })
+    $(".add").on("click", function(){
+        const size = parseInt(this.val); 
+        addDie(size);
+    })
+    $(".remove").on("click", function(){
+        const size = parseInt(this.val); 
+        removeDie(size);
+    })
+    $("#clear").on("click", function(){
+        reset();
+    })
 });
